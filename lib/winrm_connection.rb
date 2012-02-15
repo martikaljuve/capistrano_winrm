@@ -55,6 +55,7 @@ class WINRM
     else
       unless opts[:winrm_ssl_ca_store]
         inst = WinRM::WinRMWebService.new(endpoint, :plaintext, :user => opts[:winrm_user], :pass => opts[:winrm_password])
+		inst.run_cmd "cls" rescue Exception # HACK: Opens a connection to the remote machine
       else
         inst = WinRM::WinRMWebService.new(endpoint, :ssl, :user => opts[:winrm_user], :pass => opts[:winrm_password], :ca_trust_path => opts[:winrm_ssl_ca_store])
       end
